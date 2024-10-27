@@ -20,7 +20,7 @@ spec:
     spec:
       serviceAccountName: backstage-service-account
       containers:
-        - image: ghcr.io/channyein87/backstage-linkerd-workshop:sha256-f550558d6395674a009285bc9ad15884b74337537d7f0d466f61103ccdb5cdea
+        - image: ghcr.io/channyein87/backstage-linkerd-workshop:main
           imagePullPolicy: IfNotPresent
           name: backstage
           ports:
