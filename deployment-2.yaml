@@ -12,11 +12,6 @@ spec:
   selector:
     matchLabels:
       service: backstage
-  strategy:
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
@@ -25,20 +20,18 @@ spec:
     spec:
       serviceAccountName: backstage-service-account
       containers:
-        - image: $IMAGE_NAME
+        - image: ghcr.io/channyein87/backstage-linkerd-workshop:sha256-f550558d6395674a009285bc9ad15884b74337537d7f0d466f61103ccdb5cdea
           imagePullPolicy: IfNotPresent
           name: backstage
           ports:
             - containerPort: 7007
               name: http
               protocol: TCP
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
+            - secretRef:
+                name: backstage-secrets
 ---
 kind: Service
 apiVersion: v1

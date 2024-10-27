@@ -1,12 +1,26 @@
+# reconfigure the kubernetes plugin to remove the service account token
+kubernetes:
+  serviceLocatorMethod:
+    type: "multiTenant"
+  clusterLocatorMethods:
+    - type: "config"
+      clusters:
+        - name: "workshop-cluster"
+          authProvider: "serviceAccount"
+          url: https://107F17C942EBE6A89F682F61FBDD8DF2.gr7.ap-southeast-2.eks.amazonaws.com
+          skipTLSVerify: true
+
+# enable guest auth in production
 auth:
   providers:
     guest:
       dangerouslyAllowOutsideDevelopment: true
 
-app:
-  baseUrl: http://74.220.21.132
-
+# because we're not going to be running ssl in the cluster, we can disable the upgradeInsecureRequests
 backend:
-  baseUrl: http://74.220.21.132
+  baseUrl: https://backstage.lab.awscontoso.com
   csp:
     upgradeInsecureRequests: false
+
+app:
+  baseUrl: https://backstage.lab.awscontoso.com
