@@ -1,14 +1,13 @@
 # reconfigure the kubernetes plugin to remove the service account token
 kubernetes:
   serviceLocatorMethod:
-    type: "multiTenant"
+    type: multiTenant
   clusterLocatorMethods:
-    - type: "config"
+    - type: config
       clusters:
-        - name: "workshop-cluster"
-          authProvider: "serviceAccount"
+        - name: eks-lab
+          authProvider: serviceAccount
           url: https://107F17C942EBE6A89F682F61FBDD8DF2.gr7.ap-southeast-2.eks.amazonaws.com
-          skipTLSVerify: true
 
 # enable guest auth in production
 auth:
@@ -24,3 +23,11 @@ backend:
 
 app:
   baseUrl: https://backstage.lab.awscontoso.com
+
+database:
+  client: pg
+  connection:
+    host: ${POSTGRES_SERVICE_HOST}
+    port: ${POSTGRES_SERVICE_PORT}
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
