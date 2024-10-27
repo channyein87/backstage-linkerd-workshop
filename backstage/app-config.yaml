@@ -95,7 +95,7 @@ catalog:
         - allow: [User, Group]
 
     - type: url
-      target: https://github.com/benjdlambert/backstage-linkerd-workshop/blob/main/example-catalog.yaml
+      target: https://github.com/channyein87/backstage-linkerd-workshop/blob/main/example-catalog.yaml
 
     ## Uncomment these lines to add more example data
     # - type: url
@@ -113,9 +113,9 @@ kubernetes:
   clusterLocatorMethods:
     - type: config
       clusters:
-        - name: workshop-cluster
+        - name: eks-lab
           authProvider: serviceAccount
-          url: https://74.220.19.199:6443
+          url: https://107F17C942EBE6A89F682F61FBDD8DF2.gr7.ap-southeast-2.eks.amazonaws.com
           serviceAccountToken: ${BACKSTAGE_SERVICE_ACCOUNT_TOKEN}
           skipTLSVerify: true
 
